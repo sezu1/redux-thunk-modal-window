@@ -71,17 +71,27 @@ function deleteUserActionCreator(id) {
             method: 'DELETE'
         })
         const user = await response.json()
-        dispatch(deleteUserIdActionCreator(user))
+       }
+}
 
+
+function showModalActionCreator() {
+    return {
+        type: types.SHOW_MODAL
     }
 }
 
 
-function deleteUserIdActionCreator(id) {
-    return{
-        type: types.DELETE_USER,
-        payload: id
+function closeModalActionCreator(id) {
+    return {
+        type: types.CLOSE_MODAL
     }
 }
 
-export {getUsersActionCreator, getDetailUserActionCreator, clearUserActionCreator, deleteUserActionCreator}
+export {
+    getUsersActionCreator,
+    getDetailUserActionCreator,
+    clearUserActionCreator,
+    deleteUserActionCreator,
+    showModalActionCreator,
+    closeModalActionCreator}

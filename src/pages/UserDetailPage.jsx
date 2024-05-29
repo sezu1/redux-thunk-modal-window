@@ -5,17 +5,19 @@ import {useNavigate} from "react-router-dom";
 import {
     getDetailUserActionCreator,
     clearUserActionCreator,
-    deleteUserActionCreator
-} from "../store/actionCreators/usersActionCreator";
+    deleteUserActionCreator,
+    showModalActionCreator,
+    closeModalActionCreator
+      }
+from "../store/actionCreators/usersActionCreator";
 
 function UserDetailPage() {
     const navigate = useNavigate();
     const {id} = useParams();
     const dispatch = useDispatch();
 
-    const {user, loading} = useSelector((store) => store.usersReducer);
+    const {user, loading, modal} = useSelector((store) => store.usersReducer);
 
-    const [modal, setShowModal] = useState(false);
 
     useEffect(() => {
         dispatch(getDetailUserActionCreator(id));
@@ -24,9 +26,11 @@ function UserDetailPage() {
         }
     }, [])
 
+
     if (loading){
         return <div>Loading...</div>;
     }
+
 
     function deleteUser(){
         dispatch(deleteUserActionCreator(id)).then(() => {
@@ -34,10 +38,21 @@ function UserDetailPage() {
         })
     }
 
+
+    function showModelFn(){
+        dispatch(showModalActionCreator())
+    }
+
+
+    function closeModelFn(){
+        dispatch(closeModalActionCreator(id))
+    }
+
+
     return (
         <div>
             <h2>Информация о пользователе -{user.name}</h2>
-            <button onClick={() => setShowModal(true)}>delete</button>
+            <button onClick={showModelFn}>delete</button>
             <p>Username: {user.username}</p>
             <p>Email: {user.email}</p>
             <p>Phone: {user.phone}</p>
@@ -47,8 +62,8 @@ function UserDetailPage() {
                 <div className='modal'>
                     <div className='modal-content'>
                         <p>Уверены что хотите удалить этого пользователя?</p>
-                        <button onClick={()=> deleteUser(id)}>да</button>
-                        <button onClick={() => setShowModal(false)}>нет</button>
+                        <button onClick={() => deleteUser(id)}>да</button>
+                        <button onClick={closeModelFn}>нет</button>
                     </div>
                 </div>
             )}

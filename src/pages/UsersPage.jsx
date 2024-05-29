@@ -18,10 +18,9 @@ function UsersPage() {
     return (
         <div>
             <h2>Users</h2>
-
             <ul>
                 {users.map(user => (
-                    <li>
+                    <li key={user.id}>
                         <Link to={`/${user.id}`}>{user.name}</Link>
                     </li>
                 ))}
