@@ -1,0 +1,8 @@
+export const types = {
+    SET_USERS: 'SET_USERS',
+    SET_USER: 'SET_USER',
+    CLEAR_USER: 'CLEAR_USER',
+    ON_LOADING: 'ON_LOADING',
+    OFF_LOADING: 'OFF_LOADING',
+    DELETE_USER: 'DELETE_USER'
+}
